@@ -11,7 +11,7 @@ import nltk
 # nltk.download()
 
 # Preprocess a text
-def preprocess_text(text, glovemgr, is_sep_n = True, remove_stop_word = True, stemming=True, trunc_sent=-1, padding_sent=-1):
+def preprocess_text(text, glovemgr, is_sep_n = False, remove_stop_word = True, stemming=True, trunc_sent=-1, padding_sent=-1):
     # lower
     result = text.lower()
 
