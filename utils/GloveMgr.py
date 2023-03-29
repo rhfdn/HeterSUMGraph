@@ -43,7 +43,7 @@ class GloveMgr():
 
     # Convert index to word
     def i2w(self, i):
-        if i < self.vocab_npa:
+        if i < len(self.vocab_npa):
             return self.vocab_npa[i]
         return self.vocab_npa[1]
 
