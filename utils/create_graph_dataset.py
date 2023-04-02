@@ -11,19 +11,24 @@ from utils.preprocess_df import preprocess_df
 
 # %%
 # Parse args if script mode
-def create_graph(doc, tfidf_sent, glovemgr, pad_sent, word_blacklist = []):
+def create_graph(doc, tfidf_sent, glovemgr, pad_sent, word_blacklist = [], remove_unkn_words = False, self_loop=False):
   words = list(set([id for line in doc for id in line if glovemgr.i2w(id) not in word_blacklist]))
   sents = doc
+
+  # remove unknown word
+  if remove_unkn_words:
+    words = [w for w in words if w != 1]
+    sents = [[w for w in sent if w != 1] for sent in sents]
 
   edge_index_src = []
   edge_index_dst = []
   edge_attr = []
 
-  for s in range(len(doc)):
-    for w_in_s in range(len(doc[s])):
+  for s in range(len(sents)):
+    for w_in_s in range(len(sents[s])):
       for w in range(len(words)):
         if doc[s][w_in_s] == words[w]:
-          edge_index_src.append(s)
+          edge_index_src.append(len(words) + s)
           edge_index_dst.append(w)
           target_word = glovemgr.i2w(words[w])
           if target_word in tfidf_sent:
@@ -31,13 +36,17 @@ def create_graph(doc, tfidf_sent, glovemgr, pad_sent, word_blacklist = []):
           else:
             edge_attr.append(0)
 
+  if self_loop:
+    edge_index_src = edge_index_src + list(range(len(words) + len(sents)))
+    edge_index_dst = edge_index_dst + list(range(len(words) + len(sents)))
+
   # pad sentences
   #max_sent_len = max([len(sent) for sent in doc])
   sents_padded = [sent + [0 for i in range(pad_sent - len(sent))] for sent in sents]
 
-  words = torch.tensor(words, dtype=torch.float)
-  sents = torch.tensor(sents_padded, dtype=torch.float)
-  edge_index = torch.tensor([edge_index_src, edge_index_dst], dtype=torch.long)
+  words = torch.tensor(words, dtype=torch.long)
+  sents = torch.tensor(sents_padded, dtype=torch.long)
+  edge_index = torch.tensor([edge_index_src + edge_index_dst, edge_index_dst + edge_index_src], dtype=torch.long)
   edge_attr = torch.tensor(edge_attr, dtype=torch.float)
 
   data = Data(x=[words, sents], edge_index=edge_index, edge_attr=edge_attr, undirected=True)
@@ -56,8 +65,8 @@ class GraphDataset(Dataset):
   def __getitem__(self, index):
     return self.dataset[index]
 
-# %%
-def create_graph_dataset(df, tfidfs_sent, glovemgr, word_blacklist = [], doc_column_name="docs", labels_column_name="labels", is_sep_n=False, remove_stop_word = True, stemming=True, trunc_sent=-1, padding_sent=-1, trunc_doc=-1):
+#%%
+def create_graph_dataset(df, tfidfs_sent, glovemgr, word_blacklist = [], remove_unkn_words = False, self_loop=False, doc_column_name="docs", labels_column_name="labels", is_sep_n=False, remove_stop_word = True, stemming=True, trunc_sent=-1, padding_sent=-1, trunc_doc=-1):
   res = []
 
   df = preprocess_df(df=df, glovemgr=glovemgr, doc_column_name=doc_column_name, labels_column_name=labels_column_name, is_sep_n = is_sep_n, remove_stop_word = remove_stop_word, stemming=stemming, trunc_sent=trunc_sent, padding_sent=-padding_sent, trunc_doc=trunc_doc)
@@ -65,6 +74,7 @@ def create_graph_dataset(df, tfidfs_sent, glovemgr, word_blacklist = [], doc_col
   max_sent_len = max([len(s) for t in df for s in t["docs"]])
 
   for i in range(len(df)):
-    res.append({"idx": df[i]["idx"], "doc_lens": len(df[i]["docs"]), "docs": create_graph(df[i]["docs"], tfidfs_sent[i], word_blacklist=word_blacklist, pad_sent=max_sent_len, glovemgr=glovemgr), "labels": df[i]["labels"]})
+    docs = create_graph(df[i]["docs"], tfidfs_sent[i], word_blacklist=word_blacklist, remove_unkn_words=remove_unkn_words, self_loop=self_loop, pad_sent=max_sent_len, glovemgr=glovemgr)
+    res.append({"idx": df[i]["idx"], "doc_lens": len(df[i]["docs"]), "docs": docs, "labels": df[i]["labels"]})
   
   return GraphDataset(res)
