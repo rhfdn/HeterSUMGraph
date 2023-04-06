@@ -30,10 +30,14 @@ def create_graph(doc, tfidf_sent, glovemgr, pad_sent, word_blacklist = [], remov
         if doc[s][w_in_s] == words[w]:
           edge_index_src.append(len(words) + s)
           edge_index_dst.append(w)
+          edge_index_src.append(w)
+          edge_index_dst.append(len(words) + s)
           target_word = glovemgr.i2w(words[w])
           if target_word in tfidf_sent:
             edge_attr.append(tfidf_sent[s][w])
+            edge_attr.append(tfidf_sent[s][w])
           else:
+            edge_attr.append(0)
             edge_attr.append(0)
 
   if self_loop:
@@ -46,7 +50,7 @@ def create_graph(doc, tfidf_sent, glovemgr, pad_sent, word_blacklist = [], remov
 
   words = torch.tensor(words, dtype=torch.long)
   sents = torch.tensor(sents_padded, dtype=torch.long)
-  edge_index = torch.tensor([edge_index_src + edge_index_dst, edge_index_dst + edge_index_src], dtype=torch.long)
+  edge_index = torch.tensor([edge_index_src, edge_index_dst], dtype=torch.long)
   edge_attr = torch.tensor(edge_attr, dtype=torch.float)
 
   data = Data(x=[words, sents], edge_index=edge_index, edge_attr=edge_attr, undirected=True)
@@ -75,6 +79,6 @@ def create_graph_dataset(df, tfidfs_sent, glovemgr, word_blacklist = [], remove_
 
   for i in range(len(df)):
     docs = create_graph(df[i]["docs"], tfidfs_sent[i], word_blacklist=word_blacklist, remove_unkn_words=remove_unkn_words, self_loop=self_loop, pad_sent=max_sent_len, glovemgr=glovemgr)
-    res.append({"idx": df[i]["idx"], "doc_lens": len(df[i]["docs"]), "docs": docs, "labels": df[i]["labels"]})
+    res.append({"idx": df[i]["idx"], "paths": df[i]["paths"], "doc_lens": len(df[i]["docs"]), "docs": docs, "labels": df[i]["labels"]})
   
   return GraphDataset(res)
