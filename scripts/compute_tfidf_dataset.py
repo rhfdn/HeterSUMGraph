@@ -43,9 +43,6 @@ def compute_tfidf_ws(s, vectorizer = TfidfVectorizer()):
   return tfidf_dict
 
 # %%
-re_html = re.compile(r'<[^>]+>')
-
-# %%
 df = pd.read_json(args.input)
 
 # %%
@@ -56,9 +53,6 @@ doc = ""
 
 for idx in df.index:
   doc = doc + df[args.docs_col_name][idx]
-
-# remove html tags
-doc = re_html.sub('', doc)
 
 tfidfs = compute_tfidf_ws(doc)
 
