@@ -25,9 +25,10 @@ def create_graph(doc, tfidf_sent, glovemgr, pad_sent, word_blacklist = [], remov
   edge_attr = []
 
   for s in range(len(sents)):
-    for w_in_s in range(len(sents[s])):
+    list_w_in_s = list(set(sents[s]))
+    for w_in_s in range(len(list_w_in_s)):
       for w in range(len(words)):
-        if doc[s][w_in_s] == words[w]:
+        if list_w_in_s[w_in_s] == words[w]:
           edge_index_src.append(len(words) + s)
           edge_index_dst.append(w)
           edge_index_src.append(w)
