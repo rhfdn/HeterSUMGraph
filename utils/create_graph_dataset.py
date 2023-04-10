@@ -56,6 +56,9 @@ def create_graph(doc, tfidf_sent, glovemgr, pad_sent, word_blacklist = [], remov
 
   data = Data(x=[words, sents], edge_index=edge_index, edge_attr=edge_attr, undirected=True)
 
+  assert len(data.x[0]) + len(data.x[1]) >= max(edge_index[0]) + 1
+  assert len(data.x[0]) + len(data.x[1]) >= max(edge_index[1]) + 1
+
   return data
 
 #%%

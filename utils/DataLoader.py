@@ -83,12 +83,14 @@ class DataLoader():
             eis[g.edge_index[0] < len(g.x[0])] = d_x0 + eis[g.edge_index[0] < len(g.x[0])]
             eis[g.edge_index[0] >= len(g.x[0])] = d_x1 + eis[g.edge_index[0] >= len(g.x[0])] - len(g.x[0])
 
-            eid[g.edge_index[1] < start_x1] = d_x0 + eid[g.edge_index[1] < start_x1]
+            eid[g.edge_index[1] < len(g.x[0])] = d_x0 + eid[g.edge_index[1] < len(g.x[0])]
             eid[g.edge_index[1] >= len(g.x[0])] = d_x1 + eid[g.edge_index[1] >= len(g.x[0])] - len(g.x[0])
             
             edge_index_src = edge_index_src + eis.tolist()
             edge_index_dst = edge_index_dst + eid.tolist()
 
+            assert start_x1 + len(x1) >= max(edge_index_dst) + 1
+            
             edge_attr = edge_attr + g.edge_attr.tolist()
             
             d_x0 = start_x0 + len(x0)
@@ -102,6 +104,7 @@ class DataLoader():
         edge_attr = torch.tensor(edge_attr, dtype=torch.float)
         ptr = [torch.tensor(ptr0, dtype=torch.long), torch.tensor(ptr1, dtype=torch.long)]
 
-        assert len(x[0]) + len(x[1]) == max(edge_index[0]) + 1
+        assert len(x[0]) + len(x[1]) >= max(edge_index[0]) + 1
+        assert len(x[0]) + len(x[1]) >= max(edge_index[1]) + 1
 
         return Data(x=x, edge_index=edge_index, edge_attr=edge_attr, ptr=ptr, undirected=True)
