@@ -62,9 +62,9 @@ def create_graph(doc, tfidf_sent, glovemgr, pad_sent, word_blacklist = [], remov
   return data
 
 #%%
-class GraphDataset(Dataset):
+class GraphDataset:#(Dataset):
   def __init__(self, dataset) -> None:
-    super().__init__()
+    #super(GraphDataset, self).__init__()
     self.dataset = dataset
 
   def __len__(self):
