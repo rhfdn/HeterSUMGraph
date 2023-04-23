@@ -17,7 +17,7 @@ def split_doc(doc, is_sep_n = False):
   return result
 
 # Split all document in the array
-def split_all_docs(docs, is_sep_n = True):
+def split_all_docs(docs, is_sep_n = False):
     result = []
     for doc in docs:
         result.append(split_doc(doc=doc, is_sep_n=is_sep_n))
