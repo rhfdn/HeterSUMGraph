@@ -82,7 +82,8 @@ def create_graph_dataset(df, tfidfs_sent, glovemgr, word_blacklist = [], remove_
   max_sent_len = max([len(s) for t in df for s in t["docs"]])
 
   for i in range(len(df)):
-    docs = create_graph(df[i]["docs"], tfidfs_sent[i], word_blacklist=word_blacklist, remove_unkn_words=remove_unkn_words, self_loop=self_loop, pad_sent=max_sent_len, glovemgr=glovemgr)
+    idx = df[i]["idx"]
+    docs = create_graph(df[i]["docs"], tfidfs_sent["tfidf"][idx], word_blacklist=word_blacklist, remove_unkn_words=remove_unkn_words, self_loop=self_loop, pad_sent=max_sent_len, glovemgr=glovemgr)
     res.append({"idx": df[i]["idx"], "paths": df[i]["paths"], "doc_lens": len(df[i]["docs"]), "docs": docs, "labels": df[i]["labels"]})
   
   return GraphDataset(res)
