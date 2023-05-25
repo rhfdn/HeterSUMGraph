@@ -41,7 +41,7 @@ class DataLoader():
         return batch
 
     def __len__(self):
-      return int(len(self.lidx) / self.batch_size)
+        return int(len(self.lidx) / self.batch_size)
 
     def merge(self, batch):
         idxs = [e["idx"] for e in batch]
