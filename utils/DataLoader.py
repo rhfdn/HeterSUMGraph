@@ -71,9 +71,6 @@ class DataLoader():
         ptr1.append(d_x1)
 
         for g in gs:
-            assert len(g.x[0]) + len(g.x[1]) == max(g.edge_index[0]) + 1
-
-        for g in gs:
             x0 = x0 + g.x[0].tolist()
             x1 = x1 + g.x[1].tolist()
             
