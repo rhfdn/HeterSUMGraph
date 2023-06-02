@@ -44,6 +44,7 @@ def create_graph(doc, tfidf_sent, glovemgr, pad_sent, word_blacklist = [], remov
   if self_loop:
     edge_index_src = edge_index_src + list(range(len(words) + len(sents)))
     edge_index_dst = edge_index_dst + list(range(len(words) + len(sents)))
+    edge_attr = edge_attr + [0 for _ in range(len(words) + len(sents))]
 
   # pad sentences
   #max_sent_len = max([len(sent) for sent in doc])
