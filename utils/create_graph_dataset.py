@@ -57,8 +57,8 @@ def create_graph(doc, tfidf_sent, glovemgr, pad_sent, word_blacklist = [], remov
 
   data = Data(x=[words, sents], edge_index=edge_index, edge_attr=edge_attr, undirected=True)
 
-  assert len(data.x[0]) + len(data.x[1]) >= max(edge_index[0]) + 1
-  assert len(data.x[0]) + len(data.x[1]) >= max(edge_index[1]) + 1
+  assert len(data.x[0]) + len(data.x[1]) >= max(edge_index[0], default=0) + 1
+  assert len(data.x[0]) + len(data.x[1]) >= max(edge_index[1], default=0) + 1
 
   return data
 
@@ -85,6 +85,10 @@ def create_graph_dataset(df, tfidfs_sent, glovemgr, word_blacklist = [], remove_
   for i in range(len(df)):
     idx = df[i]["idx"]
     docs = create_graph(df[i]["docs"], tfidfs_sent["tfidf"][idx], word_blacklist=word_blacklist, remove_unkn_words=remove_unkn_words, self_loop=self_loop, pad_sent=max_sent_len, glovemgr=glovemgr)
+
+    if len(docs.x[0]) == 0 or len(docs.x[1]) == 0:
+      continue
+    
     res.append({"idx": idx, "doc_lens": len(df[i]["docs"]), "docs": docs, "labels": df[i]["labels"]})
   
   return GraphDataset(res)
