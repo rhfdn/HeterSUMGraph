@@ -41,16 +41,15 @@ class DataLoader():
         return batch
 
     def __len__(self):
-      return int(len(self.lidx) / self.batch_size)
+        return int(len(self.lidx) / self.batch_size)
 
     def merge(self, batch):
         idxs = [e["idx"] for e in batch]
-        paths = [e["paths"] for e in batch]
         doc_lens = [e["doc_lens"] for e in batch]
         docs = [e["docs"] for e in batch]
         docs = self.merge_graphs(docs)
         labels = [lbl for e in batch for lbl in e["labels"]]
-        return {"idx": idxs, "paths": paths, "doc_lens": doc_lens, "docs": docs, "labels": labels}
+        return {"idx": idxs, "doc_lens": doc_lens, "docs": docs, "labels": labels}
 
     def merge_graphs(self, gs):
         x0 = []
