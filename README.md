@@ -1,9 +1,17 @@
 # HeterSUMGraph
-## NYT: json with labels creation
-run convert_nyt_to_json.ipynb
-run filter_short_summaries.ipynb
-run compute_nyt_labels.ipynb
+This git repository presents and compares HeterSUMGraph and variants using GATConv, GATv2Conv and a combination of HeterSUMGraph and SummaRuNNer (using HeterSUMGraph as a sentence encoder).
 
-## Result
-HeterSUMGraph_GATConv NYT50 46.8+/-0.2 0.26+/-0.1 35.2+/-0.2
+The datasets are CNN-DailyMail and NYT50.  
+  
+paper: [HeterSUMGraph](https://arxiv.org/pdf/2004.12393.pdf)  
+
+## Clone project
+```bash
+git clone https://github.com/Baragouine/HeterSUMGraph.git
+```
+
+## Enter into the directory
+```bash
+cd HeterSUMGraph
+```
 
