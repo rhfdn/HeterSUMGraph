@@ -73,9 +73,18 @@ For CNN-DailyMail max doc len is 100 sentences, not 50 as in the paper (same max
 | HeterSUMGraph (Wang) | 46.89 | 26.26 | 42.58 |
 | HeterSUMGraph (ours) | 45.5 &plusmn; 0.0 | 24.2 &plusmn; 0.0 | 34.1 &plusmn; 0.0 |
 | HSG GATConv | 45.4 &plusmn; 0.0 | 24.2 &plusmn; 0.0 | 34.0 &plusmn; 0.0 |
-| HSG GATv2Conv | **47.2 &plusmn; 0.0** | **26.5 &plusmn; 0.0** | **35.5 &plusmn; 0.0\*** |
+| HSG GATv2Conv | **47.2 &plusmn; 0.0** | **26.5 &plusmn; 0.0** | **35.5\* &plusmn; 0.0** |
 | HSGRNN GATv2Conv | 46.9 &plusmn; 0.0 | 26.3 &plusmn; 0.0 | 35.3 &plusmn; 0.0 |
   
 *: maybe the ROUGE-L have changed in the rouge library I use.
 
-
+### CNN-DailyMail (full-length f1 rouge)
+| model | ROUGE-1 | ROUGE-2 | ROUGE-L |  
+|:-:    |:-:      |:-:      |:-:      |  
+|SummaRuNNer(Nallapati)|39.6 &plusmn; 0.2|16.2 &plusmn; 0.2|35.3 &plusmn; 0.2|  
+|HeterSUMGraph (ours) | 38.2 &plusmn; 0.0 | 15.1 &plusmn; 0.0 | 24.1 &plusmn; 0.0 |
+|HSG GATConv | 39.8 &plusmn; 0.0 | 16.3 &plusmn; 0.0 | 24.6 &plusmn; 0.0 |
+|HSG GATv2Conv | **39.9 &plusmn; 0.0** | **16.4 &plusmn; 0.0** | **24.7\* &plusmn; 0.0** |
+|HSGRNN GATv2Conv | 39.5 &plusmn; 0.0 | 16.2 &plusmn; 0.0 | 24.4 &plusmn; 0.0 |
+  
+*: maybe the ROUGE-L have changed in the rouge library I use.
