@@ -25,4 +25,28 @@ conda create --name HeterSUMGraph python=3.9
 conda activate HeterSUMGraph
 ```
 
+## Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+## Install nltk data
+To install nltk data:
+  - Open a python console.
+  - Type ``` import nltk; nltk.download()```.
+  - Download all data.
+  - Close the python console.
+
+## Convert NYT zip to NYT50 json and preprocessing it
+  - Download raw NYT zip from [https://catalog.ldc.upenn.edu/LDC2008T19](https://catalog.ldc.upenn.edu/LDC2008T19) to `data/`  
+  - Run `00-00-convert_nyt_to_json.ipynb` (convert zip to json).
+  - Run `00-01-nyt_filter_short_summaries.ipynb` (keep summary with 50 distinct word only).
+  - Run `00-02-compute_nyt_labels.ipynb` (comput labels).
+  - Run ```python scripts/compute_tfidf_dataset.py -input data/nyt_corpus_LDC2008T19_50.json -output data/nyt50_dataset_tfidf.json``` (compute tfidfs for whole dataset).
+  - Run ```python scripts/compute_tfidf_dataset.py -input data/nyt_corpus_LDC2008T19_50.json -output data/compute_tfidf_sent_dataset.json``` (compute tfidfs for each document).
+  - Run `00-03-split_NYT50.ipynb` (split NYT50 to train, val, test).
+
+
+
+
 
