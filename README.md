@@ -52,7 +52,19 @@ To install nltk data:
   - Run ```python scripts/compute_tfidf_dataset.py -input data/cnn_dailymail.json -output data/cnn_dailymail_dataset_tfidf.json``` (compute tfidfs for whole dataset).
   - Run ```python scripts/compute_tfidf_dataset.py -input data/cnn_dailymail.json -output data/cnn_dailymail_sent_tfidf.json``` (compute tfidfs for each document).
 
+## Embeddings
+For training you must use glove 300 embeddings, they must have the following path: `data/glove.6B/glove.6B.300d.txt`
 
+## Training
+For CNN-DailyMail max doc len is 100 sentences, not 50 as in the paper (same max doc len as SummaRuNNer to compare both).
+  - `01-train_HeterSUMGraph_CNN_DailyMail.ipynb`: paper model on CNN-DailyMail
+  - `02-train_HeterSUMGraph_NYT50.ipynb`: paper model on NYT50
+  - `03-train_HeterSUMGraph_CNN_DailyMail_TG_GATConv.ipynb`: HeterSUMGraph with torch_geometric GATConv layer on CNN-DailyMail.
+  - `04-train_HeterSUMGraph_NYT50_TG_GATConv.ipynb`: HeterSUMGraph with torch_geometric GATConv layer on NYT50.
+  - `05-train_HeterSUMGraph_CNN_DailyMail_TG_GATv2Conv.ipynb`: HeterSUMGraph with torch_geometric GATv2Conv layer on CNN-DailyMail.
+  - `06-train_HeterSUMGraph_NYT50_TG_GATv2Conv.ipynb`: HeterSUMGraph with torch_geometric GATv2Conv layer on NYT50.
+  - `07-train_HSGRNN_CNN_DailyMail_TG_GATv2Conv.ipynb`: HeterSUMGraph with torch_geometric GATv2Conv layer + SummaRuNNer on CNN-DailyMail.
+  - `08-train_HSGRNN_NYT50_TG_GATv2Conv.ipynb`: HeterSUMGraph with torch_geometric GATv2Conv layer + SummaRuNNer on NYT50.
 
 
 
