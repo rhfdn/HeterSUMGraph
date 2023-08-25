@@ -49,8 +49,8 @@ To install nltk data:
 ## CNN-DailyMail preprocessing
   - Follow CNN-DailyMail preprocessing instruction on: [https://github.com/Baragouine/SummaRuNNer/tree/master](https://github.com/Baragouine/SummaRuNNer/tree/master).
   - After labels computed, run ```00-03-merge_cnn_dailymail.ipynb``` to merge CNN-DailyMail to one json file.
-  - Run python scripts/compute_tfidf_dataset.py -input data/cnn_dailymail.json -output data/cnn_dailymail_dataset_tfidf.json``` (compute tfidfs for whole dataset).
-  - Run python scripts/compute_tfidf_dataset.py -input data/cnn_dailymail.json -output data/cnn_dailymail_sent_tfidf.json``` (compute tfidfs for each document).
+  - Run ```python scripts/compute_tfidf_dataset.py -input data/cnn_dailymail.json -output data/cnn_dailymail_dataset_tfidf.json``` (compute tfidfs for whole dataset).
+  - Run ```python scripts/compute_tfidf_dataset.py -input data/cnn_dailymail.json -output data/cnn_dailymail_sent_tfidf.json``` (compute tfidfs for each document).
 
 
 
