@@ -45,6 +45,13 @@ To install nltk data:
   - Run ```python scripts/compute_tfidf_dataset.py -input data/nyt_corpus_LDC2008T19_50.json -output data/nyt50_dataset_tfidf.json``` (compute tfidfs for whole dataset).
   - Run ```python scripts/compute_tfidf_dataset.py -input data/nyt_corpus_LDC2008T19_50.json -output data/compute_tfidf_sent_dataset.json``` (compute tfidfs for each document).
   - Run `00-03-split_NYT50.ipynb` (split NYT50 to train, val, test).
+  
+## CNN-DailyMail preprocessing
+  - Follow CNN-DailyMail preprocessing instruction on: [https://github.com/Baragouine/SummaRuNNer/tree/master](https://github.com/Baragouine/SummaRuNNer/tree/master).
+  - After labels computed, run ```00-03-merge_cnn_dailymail.ipynb``` to merge CNN-DailyMail to one json file.
+  - Run python scripts/compute_tfidf_dataset.py -input data/cnn_dailymail.json -output data/cnn_dailymail_dataset_tfidf.json``` (compute tfidfs for whole dataset).
+  - Run python scripts/compute_tfidf_dataset.py -input data/cnn_dailymail.json -output data/cnn_dailymail_sent_tfidf.json``` (compute tfidfs for each document).
+
 
 
 
