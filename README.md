@@ -66,6 +66,16 @@ For CNN-DailyMail max doc len is 100 sentences, not 50 as in the paper (same max
   - `07-train_HSGRNN_CNN_DailyMail_TG_GATv2Conv.ipynb`: HeterSUMGraph with torch_geometric GATv2Conv layer + SummaRuNNer on CNN-DailyMail.
   - `08-train_HSGRNN_NYT50_TG_GATv2Conv.ipynb`: HeterSUMGraph with torch_geometric GATv2Conv layer + SummaRuNNer on NYT50.
 
-
+## Result
+### NYT50 (limited-length ROUGE Recall)
+| model | ROUGE-1 | ROUGE-2 | ROUGE-L |  
+|:-:    |:-:      |:-:      |:-:      |  
+| HeterSUMGraph (Wang) | 46.89 | 26.26 | 42.58 |
+| HeterSUMGraph (ours) | 45.5 &plusmn; 0.0 | 24.2 &plusmn; 0.0 | 34.1 &plusmn; 0.0 |
+| HSG GATConv | 45.4 &plusmn; 0.0 | 24.2 &plusmn; 0.0 | 34.0 &plusmn; 0.0 |
+| HSG GATv2Conv | **47.2 &plusmn; 0.0** | **26.5 &plusmn; 0.0** | **35.5 &plusmn; 0.0\*** |
+| HSGRNN GATv2Conv | 46.9 &plusmn; 0.0 | 26.3 &plusmn; 0.0 | 35.3 &plusmn; 0.0 |
+  
+*: maybe the ROUGE-L have changed in the rouge library I use.
 
 
