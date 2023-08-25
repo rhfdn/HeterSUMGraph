@@ -15,3 +15,8 @@ git clone https://github.com/Baragouine/HeterSUMGraph.git
 cd HeterSUMGraph
 ```
 
+## Create environnement
+```bash
+conda create --name HeterSUMGraph python=3.9
+```
+
