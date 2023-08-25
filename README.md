@@ -20,3 +20,9 @@ cd HeterSUMGraph
 conda create --name HeterSUMGraph python=3.9
 ```
 
+## Activate environnement
+```bash
+conda activate HeterSUMGraph
+```
+
+
