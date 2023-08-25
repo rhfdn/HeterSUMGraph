@@ -1,4 +1,4 @@
-# HeterSUMGraph
+# HeterSUMGraph (extractive summarization)
 This repository presents and compares HeterSUMGraph and variants using GATConv, GATv2Conv and a combination of HeterSUMGraph and SummaRuNNer (using HeterSUMGraph as a sentence encoder).
 
 The datasets are CNN-DailyMail and NYT50.  
