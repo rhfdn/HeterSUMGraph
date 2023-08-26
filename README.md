@@ -43,16 +43,16 @@ preprocessing mean cleaning, labeling, etc. not mean preprocessing before traini
   - Run `00-00-convert_nyt_to_json.ipynb` (convert zip to json).
   - Run `00-01-nyt_filter_short_summaries.ipynb` (keep summary with 50 distinct word only).
   - Run `00-02-compute_nyt_labels.ipynb` (comput labels).
-  - Run ```python scripts/compute_tfidf_dataset.py -input data/nyt_corpus_LDC2008T19_50.json -output data/nyt50_dataset_tfidf.json``` (compute tfidfs for whole dataset).
-  - Run ```python scripts/compute_tfidf_sent_dataset.py -input data/nyt_corpus_LDC2008T19_50.json -output data/compute_tfidf_sent_dataset.json``` (compute tfidfs for each document).
+  - Run ```python scripts/compute_tfidf_dataset.py -input data/nyt_corpus_LDC2008T19_50.json -output data/nyt50_dataset_tfidf.json -docs_col_name docs``` (compute tfidfs for whole dataset).
+  - Run ```python scripts/compute_tfidf_sent_dataset.py -input data/nyt_corpus_LDC2008T19_50.json -output data/compute_tfidf_sent_dataset.json -docs_col_name docs``` (compute tfidfs for each document).
   - Run `00-03-split_NYT50.ipynb` (split NYT50 to train, val, test).
   
 ## CNN-DailyMail preprocessing
 preprocessing mean cleaning, labeling, etc. not mean preprocessing before training.
   - Follow CNN-DailyMail preprocessing instruction on: [https://github.com/Baragouine/SummaRuNNer/tree/master](https://github.com/Baragouine/SummaRuNNer/tree/master).
   - After labels computed, run ```00-03-merge_cnn_dailymail.ipynb``` to merge CNN-DailyMail to one json file.
-  - Run ```python scripts/compute_tfidf_dataset.py -input data/cnn_dailymail.json -output data/cnn_dailymail_dataset_tfidf.json``` (compute tfidfs for whole dataset).
-  - Run ```python scripts/compute_tfidf_sent_dataset.py -input data/cnn_dailymail.json -output data/cnn_dailymail_sent_tfidf.json``` (compute tfidfs for each document).
+  - Run ```python scripts/compute_tfidf_dataset.py -input data/cnn_dailymail.json -output data/cnn_dailymail_dataset_tfidf.json -docs_col_name article``` (compute tfidfs for whole dataset).
+  - Run ```python scripts/compute_tfidf_sent_dataset.py -input data/cnn_dailymail.json -output data/cnn_dailymail_sent_tfidf.json -docs_col_name article``` (compute tfidfs for each document).
 
 ## Embeddings
 For training you must use glove 300 embeddings, they must have the following path: `data/glove.6B/glove.6B.300d.txt`
