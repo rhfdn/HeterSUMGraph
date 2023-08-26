@@ -38,6 +38,7 @@ To install nltk data:
   - Close the python console.
 
 ## Convert NYT zip to NYT50 json and preprocessing it
+preprocessing mean cleaning, labelising, etc. not mean preprocessing before training.
   - Download raw NYT zip from [https://catalog.ldc.upenn.edu/LDC2008T19](https://catalog.ldc.upenn.edu/LDC2008T19) to `data/`  
   - Run `00-00-convert_nyt_to_json.ipynb` (convert zip to json).
   - Run `00-01-nyt_filter_short_summaries.ipynb` (keep summary with 50 distinct word only).
@@ -47,6 +48,7 @@ To install nltk data:
   - Run `00-03-split_NYT50.ipynb` (split NYT50 to train, val, test).
   
 ## CNN-DailyMail preprocessing
+preprocessing mean cleaning, labelising, etc. not mean preprocessing before training.
   - Follow CNN-DailyMail preprocessing instruction on: [https://github.com/Baragouine/SummaRuNNer/tree/master](https://github.com/Baragouine/SummaRuNNer/tree/master).
   - After labels computed, run ```00-03-merge_cnn_dailymail.ipynb``` to merge CNN-DailyMail to one json file.
   - Run ```python scripts/compute_tfidf_dataset.py -input data/cnn_dailymail.json -output data/cnn_dailymail_dataset_tfidf.json``` (compute tfidfs for whole dataset).
