@@ -62,7 +62,8 @@ tfidfs computing is only necessary for HeterSUMGraph based models.
 For training you must use glove 300 embeddings, they must have the following path: `data/glove.6B/glove.6B.300d.txt`
 
 ## Training
-For CNN-DailyMail max doc len is 100 sentences, not 50 as in the paper (same max doc len as SummaRuNNer to compare both).
+For CNN/DailyMail max doc len is 100 sentences, not 50 as in the paper (same max doc len as SummaRuNNer to compare both).
+Run one of the notebooks below to train and evaluate the associated model:  
   - `01-train_HeterSUMGraph_CNN_DailyMail.ipynb`: paper model on CNN-DailyMail
   - `02-train_HeterSUMGraph_NYT50.ipynb`: paper model on NYT50
   - `03-train_HeterSUMGraph_CNN_DailyMail_TG_GATConv.ipynb`: HeterSUMGraph with torch_geometric GATConv layer on CNN-DailyMail.
@@ -84,7 +85,7 @@ For CNN-DailyMail max doc len is 100 sentences, not 50 as in the paper (same max
   
 *: maybe the ROUGE-L have changed in the rouge library I use.
 
-### CNN-DailyMail (full-length f1 rouge)
+### CNN/DailyMail (full-length f1 rouge)
 | model | ROUGE-1 | ROUGE-2 | ROUGE-L |  
 |:-:    |:-:      |:-:      |:-:      |  
 |SummaRuNNer(Nallapati)|39.6 &plusmn; 0.2|16.2 &plusmn; 0.2|35.3 &plusmn; 0.2|  
