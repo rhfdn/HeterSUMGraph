@@ -150,9 +150,7 @@ class MultiProcessusDataLoader():
 
     def __del__(self):
         for p in self.workers:
-            p[2].put("stop")
-        for p in self.workers:
-            p[0].join()
+            p[0].terminate()
 
     def __getitem__(self, idx):
         assert idx >= 0
