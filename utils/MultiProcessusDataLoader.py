@@ -140,6 +140,7 @@ class MultiProcessusDataLoader():
             i_queue = multiprocessing.Queue()
             o_queue = multiprocessing.Queue()
             worker = multiprocessing.Process(target=worker_data_loader,
+                                             daemon=True,
                                              args=(num_worker, self.nb_worker, o_queue, i_queue,
                                                    self.dataset, self.batch_size, tfidfs_sent,
                                                    word_blacklist, remove_unkn_words, self_loop,
